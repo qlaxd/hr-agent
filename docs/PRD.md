@@ -12,7 +12,7 @@
 
 Ez a dokumentum a KIBIT Solutions Talent Tanácsadó csapatát támogató, mesterséges intelligencia (AI) alapú belső alkalmazás követelményeit vázolja fel. Az eszköz integrálódni fog a Google Workspace-ben tárolt meglévő jelöltadatbázissal, hogy egyszerűsítse és javítsa a toborzási folyamatot.
 
-A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való illesztése, relevancia pontszám és tömör értékelés biztosításával minden egyes jelölthöz. Ezenkívül tartalmazni fog egy „helpdesk” funkciót, amely lehetővé teszi a toborzóknak, hogy természetes nyelven tegyenek fel kérdéseket a jelöltállományról. A kezdeti verzió a alapvető funkciókra fókuszál, egyszerű felhasználói felülettel, biztosítva az adatbiztonságot és a KIBT adatvédelmi irányelveinek való megfelelést, mint legfőbb prioritásokat.
+A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való illesztése, relevancia pontszám és tömör értékelés biztosításával minden egyes jelölthöz. Ezenkívül tartalmazni fog egy „helpdesk” funkciót, amely lehetővé teszi a toborzóknak, hogy természetes nyelven tegyenek fel kérdéseket a jelöltállományról. A kezdeti verzió a alapvető funkciókra fókuszál, egyszerű felhasználói felülettel, biztosítva az adatbiztonságot és a KIBIT adatvédelmi irányelveinek való megfelelést, mint legfőbb prioritásokat.
 
 ## 2. Célok
 
@@ -46,7 +46,7 @@ A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való i
 
 ### 3.2 Alapvető perszóna adatok
 
-- **Talent Tanácsadó**: A KIBT Solutions toborzócsapatának tagja. Felelős a jelöltek felkutatásáért, szűréséért és bemutatásáért különböző technikai és nem technikai szerepkörökben. Gyors, hatékony és pontos eszközökre van szüksége a felvételi igények kielégítéséhez.
+- **Talent Tanácsadó**: A KIBIT Solutions toborzócsapatának tagja. Felelős a jelöltek felkutatásáért, szűréséért és bemutatásáért különböző technikai és nem technikai szerepkörökben. Gyors, hatékony és pontos eszközökre van szüksége a felvételi igények kielégítéséhez.
 - **Rendszeradminisztrátor**: Műszaki munkatárs, aki felelős az alkalmazás telepítéséért, karbantartásáért, biztonságáért és teljesítményéért.
 
 ### 3.3 Szerep alapú hozzáférés
@@ -75,7 +75,7 @@ A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való i
 ### Biztonság és adatvédelem (Prioritás: Magas)
 
 - A rendszernek felhasználói azonosítást kell megkövetelnie annak biztosítására, hogy csak az arra jogosult személyzet férhessen hozzá.
-- Szigorúan be kell tartania a KIBT adatvédelmi irányelveit, személyes adatok nem hagyhatják el a biztonságos környezetet.
+- Szigorúan be kell tartania a KIBIT adatvédelmi irányelveit, személyes adatok nem hagyhatják el a biztonságos környezetet.
 - Bármilyen külső adatfeldolgozást ellenőrzött és anonimizált módon kell végezni, előzetes jóváhagyással.
 
 ### Rendszer hoszting (Prioritás: Magas)
@@ -101,19 +101,19 @@ A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való i
 
 - Kétértelmű lekérdezéseknél a rendszer a lehető legjobb eredményt adja vissza egy nyilatkozattal, vagy pontosítást kér.
 - Ha egy keresés nem hoz eredményt, egyértelmű „Nincs találat” üzenet jelenik meg.
-- A rendszernek kecsesen kell kezelnie a különböző dokumentumformátumokat, beleértve a PDF, DOCX és DOC fájlokat.
-- Felhasználóbarát hibaüzenetek jelennek meg az adatbázissal való kapcsolódási problémák esetén.
+- A rendszernek helyesen kell kezelnie a különböző dokumentumformátumokat, beleértve a PDF, DOCX, ODF és DOC fájlokat.
+- Felhasználóbarát hibaüzenetek jelennek meg (toast) az adatbázissal való kapcsolódási problémák esetén.
 
 ### 5.4. UI/UX kiemelések
 
 - Minimalista, tiszta és funkció-orientált design.
-- Hangsúly a gyors válaszidőn minden keresés és lekérdezés esetén.
+- Hangsúly a biztonságon és a gyors válaszidőn minden keresés és lekérdezés esetén.
 - Az eredmények tiszta, átlátható megjelenítése a gyors döntéshozatal elősegítése érdekében.
 - Egyoldalas alkalmazásélmény a felesleges oldalbetöltések és navigáció elkerülése érdekében.
 
 ## 6. Narratíva
 
-Anna a KIBT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a legjobb jelölteket egy új vezető Java fejlesztő pozícióra. Korábban manuálisan kellett átnéznie több tucat mappát és önéletrajzot a Google Workspace-ben, ami lassú és fáradságos volt. Most megnyitja ezt az eszközt, beilleszti a munkaköri leírást a keresőmezőbe, és másodperceken belül megkapja az adatbázisukból az 5 legjobb jelölt rangsorolt listáját, relevancia pontszámmal és összefoglalóval mindegyikhez. Ezután a helpdesk funkciót használva megkérdezi: „Hányan rendelkeznek felhőplatformokkal kapcsolatos tapasztalattal?” és azonnali választ kap. Ez az eszköz lehetővé teszi számára, hogy perceken belül azonosítsa a legígéretesebb jelölteket órák helyett, jelentősen felgyorsítva a munkafolyamatát és javítva a benyújtott jelöltek minőségét.
+Anna a KIBIT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a legjobb jelölteket egy új vezető Java fejlesztő pozícióra. Korábban manuálisan kellett átnéznie több tucat mappát és önéletrajzot a Google Workspace-ben, ami lassú és fáradságos volt. Most megnyitja ezt az eszközt, beilleszti a munkaköri leírást a keresőmezőbe, és másodperceken belül megkapja az adatbázisukból az 5 legjobb jelölt rangsorolt listáját, relevancia pontszámmal és összefoglalóval mindegyikhez. Ezután a helpdesk funkciót használva megkérdezi: „Hányan rendelkeznek felhőplatformokkal kapcsolatos tapasztalattal?” és azonnali választ kap. Ez az eszköz lehetővé teszi számára, hogy perceken belül azonosítsa a legígéretesebb jelölteket órák helyett, jelentősen felgyorsítva a munkafolyamatát és javítva a benyújtott jelöltek minőségét.
 
 ## 7. Sikermutatók
 
@@ -148,7 +148,7 @@ Anna a KIBT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a 
 - Minden eredeti jelölt dokumentum a biztonságos Google Workspace környezetben marad.
 - Az alkalmazás az adatokat memóriában vagy egy biztonságos, ideiglenes tárolóhelyen dolgozza fel a jóváhagyott hoszting környezeten belül.
 - Szigorú adatanonimizálási folyamatot kell implementálni és jóváhagyni az összes személyazonosításra alkalmas adat (PII) esetében, mielőtt bármilyen külső szolgáltatást (pl. LLM API-kat) használnánk.
-- A rendszernek teljes mértékben meg kell felelnie a GDPR-nek és a KIBT belső adatbiztonsági irányelveinek.
+- A rendszernek teljes mértékben meg kell felelnie a GDPR-nek és a KIBIT belső adatbiztonsági irányelveinek.
 
 ### 8.3. Skálázhatóság és teljesítmény
 
@@ -167,18 +167,14 @@ Anna a KIBT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a 
 
 ### 9.1. Projektbecslés
 
-- Közepes: 4-6 hét a kezdeti verzióra (MVP).
+- Közepes: 2-4 hét a kezdeti verzióra (MVP).
 
-### 9.2. Csapatlétszám és összetétel
 
-- Kis csapat: 2-4 fő
-  - 1 termékmenedzser, 1-2 AI/backend mérnök, 1 frontend mérnök.
+### 9.2. Javasolt fázisok
 
-### 9.3. Javasolt fázisok
-
-1. **Fázis**: Backend és alapvető logika (2-3 hét)
+1. **Fázis**: Backend és alapvető logika (1-2 hét)
    - Fő eredmények: Biztonságos kapcsolat a Google Workspace-szel, dokumentumelemző pipeline, alapvető keresési és illesztési algoritmus, és kezdeti helpdesk lekérdezési logika.
-2. **Fázis**: UI és integráció (2-3 hét)
+2. **Fázis**: UI és integráció (1-2 hét)
    - Fő eredmények: Egyszerű webes felület, felhasználói hitelesítés, és a frontend és backend végponttól végpontig tartó integrációja.
 3. **Fázis**: Tesztelés és bevezetés (1 hét)
    - Fő eredmények: Felhasználói elfogadási tesztelés (UAT) a Talent Tanácsadó csapattal, hibajavítás, és a hivatalos belső bevezetés.
@@ -267,7 +263,7 @@ Anna a KIBT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a 
 ### 1.2 Product summary
 This document outlines the requirements for an internal AI-powered application designed to support the Talent Consultant team at KIBIT Solutions. The tool will integrate with the existing candidate database stored in Google Workspace to streamline and enhance the recruitment process.
 
-The core functionality includes matching candidates to specific job profiles by providing a relevance score and a concise evaluation for each. Additionally, it will feature a "helpdesk" function, allowing recruiters to ask natural language questions about the candidate pool. The initial version will focus on core functionality with a simple user interface, ensuring data security and compliance with KIBT's data policies are top priorities.
+The core functionality includes matching candidates to specific job profiles by providing a relevance score and a concise evaluation for each. Additionally, it will feature a "helpdesk" function, allowing recruiters to ask natural language questions about the candidate pool. The initial version will focus on core functionality with a simple user interface, ensuring data security and compliance with KIBIT's data policies are top priorities.
 
 ## 2. Goals
 ### 2.1 Business goals
@@ -294,7 +290,7 @@ The core functionality includes matching candidates to specific job profiles by 
 - System Administrator
 
 ### 3.2 Basic persona details
-- **Talent Consultant**: A member of the KIBT Solutions recruitment team. They are responsible for sourcing, screening, and presenting candidates for a variety of technical and non-technical roles. They need tools that are fast, efficient, and accurate to meet hiring demands.
+- **Talent Consultant**: A member of the KIBIT Solutions recruitment team. They are responsible for sourcing, screening, and presenting candidates for a variety of technical and non-technical roles. They need tools that are fast, efficient, and accurate to meet hiring demands.
 - **System Administrator**: A technical staff member responsible for the deployment, maintenance, security, and performance of the application.
 
 ### 3.3 Role-based access
@@ -314,7 +310,7 @@ The core functionality includes matching candidates to specific job profiles by 
   - Results should be displayed in a clean, easy-to-read format.
 - **Security & Data Privacy** (Priority: High)
   - The system must require user authentication to ensure only authorized personnel have access.
-  - It must strictly adhere to KIBT's data policy, with no personal data leaving the secure environment.
+  - It must strictly adhere to KIBIT's data policy, with no personal data leaving the secure environment.
   - Any external data processing must be done in a controlled and anonymized manner, with prior approval.
 - **System Hosting** (Priority: High)
   - The application must be deployable on Google Cloud or a local on-premise environment to maintain data security.
@@ -348,7 +344,7 @@ The core functionality includes matching candidates to specific job profiles by 
 - A single-page application experience to avoid unnecessary page loads and navigation.
 
 ## 6. Narrative
-Anna is a Talent Consultant at KIBT Solutions who needs to quickly find the best candidates for a new Senior Java Developer role. Previously, she had to manually search through dozens of folders and CVs in Google Workspace, which was slow and tedious. She now opens this tool, pastes the job description into the search box, and within seconds gets a ranked list of the top 5 candidates from their database, complete with a relevance score and a summary for each. She then uses the helpdesk feature to ask, "How many of these have experience with cloud platforms?" and gets an instant answer. This tool allows her to identify the most promising candidates in minutes instead of hours, significantly speeding up her workflow and improving the quality of her submissions.
+Anna is a Talent Consultant at KIBIT Solutions who needs to quickly find the best candidates for a new Senior Java Developer role. Previously, she had to manually search through dozens of folders and CVs in Google Workspace, which was slow and tedious. She now opens this tool, pastes the job description into the search box, and within seconds gets a ranked list of the top 5 candidates from their database, complete with a relevance score and a summary for each. She then uses the helpdesk feature to ask, "How many of these have experience with cloud platforms?" and gets an instant answer. This tool allows her to identify the most promising candidates in minutes instead of hours, significantly speeding up her workflow and improving the quality of her submissions.
 
 ## 7. Success metrics
 ### 7.1. User-centric metrics
@@ -376,7 +372,7 @@ Anna is a Talent Consultant at KIBT Solutions who needs to quickly find the best
 - All original candidate documents will remain within the secure Google Workspace environment.
 - The application will process data in-memory or in a secure, temporary storage location within the approved hosting environment.
 - A strict data anonymization process for all personally identifiable information (PII) must be implemented and approved before using any external services (e.g., LLM APIs).
-- The system must be fully compliant with GDPR and KIBT's internal data security policies.
+- The system must be fully compliant with GDPR and KIBIT's internal data security policies.
 
 ### 8.3. Scalability & performance
 - The architecture must be designed to handle the current and future size of the candidate database without significant performance degradation.
@@ -391,13 +387,9 @@ Anna is a Talent Consultant at KIBT Solutions who needs to quickly find the best
 
 ## 9. Milestones & sequencing
 ### 9.1. Project estimate
-- Medium: 4-6 weeks for the initial version (MVP).
+- Medium: 2-5 weeks for the initial version (MVP).
 
-### 9.2. Team size & composition
-- Small Team: 2-4 people
-  - 1 Product Manager, 1-2 AI/Backend Engineers, 1 Frontend Engineer.
-
-### 9.3. Suggested phases
+### 9.2. Suggested phases
 - **Phase 1**: Backend & Core Logic (2-3 weeks)
   - Key deliverables: Secure connection to Google Workspace, document parsing pipeline, core search and matching algorithm, and initial helpdesk query logic.
 - **Phase 2**: UI & Integration (2-3 weeks)
