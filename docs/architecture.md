@@ -191,7 +191,7 @@ As requested, here is a comparison of the recommended GCP approach versus a loca
 
 ## 6. Security & Data Privacy
 
-- **Authentication**: All access to the application will be gated by **Google OAuth 2.0**, ensuring only authenticated KIBT employees can use the service.
+- **Authentication**: All access to the application will be gated by **Google OAuth 2.0**, ensuring only authenticated KIBIT employees can use the service.
 - **Authorization**: The backend API will validate user roles to ensure they have the necessary permissions.
 - **Data-in-Transit**: All communication between the client, API, and backend services will be encrypted using TLS.
 - **Data-at-Rest**: All data stored in Cloud SQL, Vector Search, and Cloud Storage will be encrypted by default.
