@@ -1,4 +1,263 @@
-# PRD: Resourcing AI Agent
+
+# Termékkövetelmény-specifikáció: Erőforrás-tervező AI ügynök
+
+## 1. Termékáttekintés
+
+### 1.1 Dokumentum címe és verziója
+
+- **PRD**: Erőforrás-tervező AI ügynök
+- **Verzió**: 1.0
+
+### 1.2 Termék összefoglaló
+
+Ez a dokumentum a KIBIT Solutions Talent Tanácsadó csapatát támogató, mesterséges intelligencia (AI) alapú belső alkalmazás követelményeit vázolja fel. Az eszköz integrálódni fog a Google Workspace-ben tárolt meglévő jelöltadatbázissal, hogy egyszerűsítse és javítsa a toborzási folyamatot.
+
+A fő funkciók közé tartozik a jelöltek adott munkaköri profilokhoz való illesztése, relevancia pontszám és tömör értékelés biztosításával minden egyes jelölthöz. Ezenkívül tartalmazni fog egy „helpdesk” funkciót, amely lehetővé teszi a toborzóknak, hogy természetes nyelven tegyenek fel kérdéseket a jelöltállományról. A kezdeti verzió a alapvető funkciókra fókuszál, egyszerű felhasználói felülettel, biztosítva az adatbiztonságot és a KIBT adatvédelmi irányelveinek való megfelelést, mint legfőbb prioritásokat.
+
+## 2. Célok
+
+### 2.1 Üzleti célok
+
+- A toborzócsapat hatékonyságának növelése.
+- A betöltési idő csökkentése a jelöltkeresési fázis felgyorsításával.
+- A jelölt-munkakör illesztés minőségének és pontosságának javítása.
+- A meglévő belső jelöltadatbázis értékének és kihasználtságának maximalizálása.
+
+### 2.2 Felhasználói célok
+
+- Gyorsan megtalálni a legrelevánsabb jelölteket egy adott munkaköri profilhoz manuális keresés nélkül.
+- Gyors, összefoglalt áttekintést kapni egy jelölt alkalmasságáról egy szerepkörre.
+- Könnyen lekérdezni az adatbázist specifikus információkért, például egy adott készséggel rendelkező jelöltek számáról.
+
+### 2.3 Nem célok
+
+- Ez az eszköz nem a toborzás emberi elemének kiváltására szolgál; ez egy segítő eszköz.
+- Az alkalmazás nem kezeli a jelöltekkel való közvetlen kommunikációt.
+- Nem kezeli a teljes toborzási életciklust (pl. interjúütemezés, ajánlatkezelés).
+- Az összetett felhasználói felület nem cél a kezdeti kiadásnál.
+- A rendszer nem tárol semmilyen jelöltadatot a jóváhagyott, biztonságos hoszting környezeten kívül.
+
+## 3. Felhasználói perszónák
+
+### 3.1 Főbb felhasználói típusok
+
+- Talent Tanácsadó (Toborzó)
+- Rendszeradminisztrátor
+
+### 3.2 Alapvető perszóna adatok
+
+- **Talent Tanácsadó**: A KIBT Solutions toborzócsapatának tagja. Felelős a jelöltek felkutatásáért, szűréséért és bemutatásáért különböző technikai és nem technikai szerepkörökben. Gyors, hatékony és pontos eszközökre van szüksége a felvételi igények kielégítéséhez.
+- **Rendszeradminisztrátor**: Műszaki munkatárs, aki felelős az alkalmazás telepítéséért, karbantartásáért, biztonságáért és teljesítményéért.
+
+### 3.3 Szerep alapú hozzáférés
+
+- **Talent Tanácsadó**: Teljes hozzáféréssel rendelkezik az alkalmazás funkcióihoz, beleértve a jelöltkeresést, a helpdesk Q&A használatát és az összes eredmény megtekintését. Az alapul szolgáló adatokhoz csak olvasható hozzáféréssel rendelkezik.
+- **Rendszeradminisztrátor**: Kezeli a rendszerkonfigurációt, felügyeli a teljesítményt, biztosítja a biztonsági megfelelőséget, és kezeli a Google Workspace-szel való integrációt. Nincs hozzáférése a felhasználói felülethez toborzási feladatokhoz, de felügyeli a rendszer állapotát.
+
+## 4. Funkcionális követelmények
+
+### Jelöltkeresés és illesztés (Prioritás: Magas)
+
+- A felhasználóknak képesnek kell lenniük munkaköri leírás bemenetére a rendszerbe.
+- A rendszer feldolgozza a bemenetet, és keres a csatlakoztatott Google Workspace adatbázisban.
+- Az eredmény egy rangsorolt lista lesz releváns jelöltekről, mindegyikhez relevancia pontszámmal és egy rövid, AI által generált összefoglalóval.
+
+### Helpdesk Q&A (Prioritás: Magas)
+
+- Természetes nyelvű lekérdezési felület a jelöltadatbázissal kapcsolatos kérdések feltevéséhez.
+- A rendszernek képesnek kell lennie megérteni és megválaszolni olyan kérdéseket, mint például: "Vannak-e Kubernetes tudással rendelkező jelöltek?" vagy "Hány jelöltet interjúztattunk már fejlesztői pozícióra?"
+
+### Egyszerű felhasználói felület (Prioritás: Közepes)
+
+- Tiszta, web alapú felhasználói felület világos bemeneti mezőkkel a munkaköri profilhoz és a helpdesk kérdésekhez.
+- Az eredményeket tiszta, könnyen olvasható formátumban kell megjeleníteni.
+
+### Biztonság és adatvédelem (Prioritás: Magas)
+
+- A rendszernek felhasználói azonosítást kell megkövetelnie annak biztosítására, hogy csak az arra jogosult személyzet férhessen hozzá.
+- Szigorúan be kell tartania a KIBT adatvédelmi irányelveit, személyes adatok nem hagyhatják el a biztonságos környezetet.
+- Bármilyen külső adatfeldolgozást ellenőrzött és anonimizált módon kell végezni, előzetes jóváhagyással.
+
+### Rendszer hoszting (Prioritás: Magas)
+
+- Az alkalmazásnak telepíthetőnek kell lennie a Google Cloud-ra vagy helyi, on-premise környezetbe az adatbiztonság fenntartása érdekében.
+
+## 5. Felhasználói élmény
+
+### 5.1. Belépési pontok és első alkalommal használó felhasználói folyamat
+
+- A felhasználók egy dedikált belső URL-en keresztül érik el az eszközt.
+- Az első hozzáférés egyszeri bejelentkezést igényel, lehetőleg SSO-n keresztül a céges Google fiókjukkal.
+- A bejelentkezés után a felhasználó egy egyszerű irányítópultot lát, amelyen a két fő funkció jól láthatóan megjelenik.
+
+### 5.2. Alapvető élmény
+
+1. **Lépés**: Az eszköz elérése: A felhasználó bejelentkezik, és lát egy tiszta irányítópultot két fő funkcióval: „Jelöltek keresése” és „Kérdezzen a Helpdesk-től”. A felület intuitív, és minimális képzést igényel.
+2. **Lépés**: Jelöltek keresése: A felhasználó beilleszt egy teljes munkaköri leírást a „Jelöltek keresése” beviteli mezőbe, és rákattint a „Keresés” gombra. A rendszer azonnali vizuális visszajelzést ad, hogy a keresés folyamatban van.
+3. **Lépés**: Eredmények áttekintése: Egy rangsorolt jelöltlista jelenik meg. A lista minden eleme megjeleníti a jelölt nevét, egy relevancia pontszámot és egy tömör összefoglalót a képesítéseikről. Az összefoglaló kiemeli a dokumentumaikból azokat a specifikus készségeket és tapasztalatokat, amelyek illeszkednek a munkaköri profilhoz.
+4. **Lépés**: A Helpdesk használata: A felhasználó beír egy kérdést a „Kérdezzen a Helpdesk-től” mezőbe, és megnyomja az entert. A rendszer közvetlen, szöveges választ ad a kérdésre.
+
+### 5.3. Haladó funkciók és szélsőséges esetek
+
+- Kétértelmű lekérdezéseknél a rendszer a lehető legjobb eredményt adja vissza egy nyilatkozattal, vagy pontosítást kér.
+- Ha egy keresés nem hoz eredményt, egyértelmű „Nincs találat” üzenet jelenik meg.
+- A rendszernek kecsesen kell kezelnie a különböző dokumentumformátumokat, beleértve a PDF, DOCX és DOC fájlokat.
+- Felhasználóbarát hibaüzenetek jelennek meg az adatbázissal való kapcsolódási problémák esetén.
+
+### 5.4. UI/UX kiemelések
+
+- Minimalista, tiszta és funkció-orientált design.
+- Hangsúly a gyors válaszidőn minden keresés és lekérdezés esetén.
+- Az eredmények tiszta, átlátható megjelenítése a gyors döntéshozatal elősegítése érdekében.
+- Egyoldalas alkalmazásélmény a felesleges oldalbetöltések és navigáció elkerülése érdekében.
+
+## 6. Narratíva
+
+Anna a KIBT Solutions Talent Tanácsadója, akinek gyorsan meg kell találnia a legjobb jelölteket egy új vezető Java fejlesztő pozícióra. Korábban manuálisan kellett átnéznie több tucat mappát és önéletrajzot a Google Workspace-ben, ami lassú és fáradságos volt. Most megnyitja ezt az eszközt, beilleszti a munkaköri leírást a keresőmezőbe, és másodperceken belül megkapja az adatbázisukból az 5 legjobb jelölt rangsorolt listáját, relevancia pontszámmal és összefoglalóval mindegyikhez. Ezután a helpdesk funkciót használva megkérdezi: „Hányan rendelkeznek felhőplatformokkal kapcsolatos tapasztalattal?” és azonnali választ kap. Ez az eszköz lehetővé teszi számára, hogy perceken belül azonosítsa a legígéretesebb jelölteket órák helyett, jelentősen felgyorsítva a munkafolyamatát és javítva a benyújtott jelöltek minőségét.
+
+## 7. Sikermutatók
+
+### 7.1. Felhasználóközpontú mutatók
+
+- Magas bevezetési arány és gyakori használat a Talent Tanácsadó csapat részéről.
+- Pozitív minőségi visszajelzések felhasználói felmérések és interjúk alapján.
+- Mérhető csökkenés a forráskeresési feladatra fordított időben.
+- Magas napi lekérdezések száma felhasználónként.
+
+### 7.2. Üzleti mutatók
+
+- Az átlagos betöltési idő csökkenése a nyitott pozíciók esetében.
+- Növekedés az interjúra meghívott jelöltek százalékában.
+- Meglévő belső jelöltadatbázisból származó elhelyezési arány növekedése.
+
+### 7.3. Technikai mutatók
+
+- Az átlagos lekérdezési és keresési válaszidő egy meghatározott küszöb alatt marad.
+- Magas rendszerüzemidő és rendelkezésre állás (pl. 99,9%).
+- Nulla adatvesztés vagy biztonsági incidens.
+
+## 8. Technikai megfontolások
+
+### 8.1. Integrációs pontok
+
+- Google Workspace API a Google Drive-ban lévő dokumentumok biztonságos eléréséhez.
+- Google Identity Platform (OAuth 2.0) az egyszeri bejelentkezéshez (SSO) hitelesítéshez.
+
+### 8.2. Adattárolás és adatvédelem
+
+- Minden eredeti jelölt dokumentum a biztonságos Google Workspace környezetben marad.
+- Az alkalmazás az adatokat memóriában vagy egy biztonságos, ideiglenes tárolóhelyen dolgozza fel a jóváhagyott hoszting környezeten belül.
+- Szigorú adatanonimizálási folyamatot kell implementálni és jóváhagyni az összes személyazonosításra alkalmas adat (PII) esetében, mielőtt bármilyen külső szolgáltatást (pl. LLM API-kat) használnánk.
+- A rendszernek teljes mértékben meg kell felelnie a GDPR-nek és a KIBT belső adatbiztonsági irányelveinek.
+
+### 8.3. Skálázhatóság és teljesítmény
+
+- Az architektúrát úgy kell megtervezni, hogy a jelöltadatbázis jelenlegi és jövőbeni méretét jelentős teljesítményromlás nélkül kezelje.
+- A rendszernek támogatnia kell a Talent Tanácsadó csapat összes tagjának egyidejű használatát.
+- Hatékony dokumentum-indexelési és -lekérdezési stratégiát (pl. vektordátbázist) kell implementálni a gyors keresési eredmények biztosításához.
+
+### 8.4. Lehetséges kihívások
+
+- Pontos elemzés és strukturált információ kinyerése a különböző, strukturálatlan önéletrajz formátumokból.
+- Annak biztosítása, hogy az AI által generált összefoglalók tényileg pontosak, relevánsak és mentesek legyenek a torzításoktól.
+- Szigorú adatbiztonság és adatvédelem fenntartása a külső AI modellek potenciális kihasználása során.
+- Az optimális hoszting megoldás (Google Cloud vs. helyi) kiválasztása a költségek, biztonság és karbantartási terhek egyensúlyának megteremtésével.
+
+## 9. Mérföldkövek és ütemezés
+
+### 9.1. Projektbecslés
+
+- Közepes: 4-6 hét a kezdeti verzióra (MVP).
+
+### 9.2. Csapatlétszám és összetétel
+
+- Kis csapat: 2-4 fő
+  - 1 termékmenedzser, 1-2 AI/backend mérnök, 1 frontend mérnök.
+
+### 9.3. Javasolt fázisok
+
+1. **Fázis**: Backend és alapvető logika (2-3 hét)
+   - Fő eredmények: Biztonságos kapcsolat a Google Workspace-szel, dokumentumelemző pipeline, alapvető keresési és illesztési algoritmus, és kezdeti helpdesk lekérdezési logika.
+2. **Fázis**: UI és integráció (2-3 hét)
+   - Fő eredmények: Egyszerű webes felület, felhasználói hitelesítés, és a frontend és backend végponttól végpontig tartó integrációja.
+3. **Fázis**: Tesztelés és bevezetés (1 hét)
+   - Fő eredmények: Felhasználói elfogadási tesztelés (UAT) a Talent Tanácsadó csapattal, hibajavítás, és a hivatalos belső bevezetés.
+
+## 10. Felhasználói történetek
+
+### 10.1. Biztonságos felhasználói bejelentkezés
+
+- **Azonosító**: US-001
+- **Leírás**: Talent Tanácsadóként biztonságosan szeretnék bejelentkezni az alkalmazásba, hogy csak az arra jogosult személyzet férhessen hozzá a jelöltadatokhoz.
+- **Elfogadási feltételek**:
+  - Az alkalmazás biztosít egy bejelentkezési mechanizmust.
+  - A felhasználók a céges Google Workspace hitelesítő adataikkal (SSO) tudnak azonosítani.
+  - Az érvényes hitelesítő adatokkal nem rendelkező felhasználók számára megtagadja a hozzáférést.
+  - Minden hozzáférési kísérlet (sikeres és sikertelen) naplózásra kerül.
+
+### 10.2. Jelöltek keresése munkaköri profil alapján
+
+- **Azonosító**: US-002
+- **Leírás**: Talent Tanácsadóként munkaköri profilt szeretnék megadni, és releváns jelöltek listáját szeretném megkapni, hogy gyorsan azonosíthassam a potenciális felvételeket.
+- **Elfogadási feltételek**:
+  - A felhasználói felületen van egy szövegterület, ahová munkaköri profil írható be.
+  - Egy „Keresés” gomb indítja a jelöltkeresési folyamatot.
+  - A rendszer sikeresen keresi az összes megadott fájltípust (.pdf, .docx, .doc) a konfigurált Google Workspace helyen.
+  - A megfelelő jelöltek listája visszatér, és megjelenik a felhasználói felületen.
+
+### 10.3. Jelölt relevancia pontszámának megtekintése
+
+- **Azonosító**: US-003
+- **Leírás**: Talent Tanácsadóként relevancia pontszámot szeretnék látni minden megfelelő jelölthöz, hogy rangsorolhassam, kit nézzek át először.
+- **Elfogadási feltételek**:
+  - Minden jelölt a keresési eredmények között számszerű vagy százalékos pontszámmal jelenik meg.
+  - A keresési eredmények alapértelmezés szerint a relevancia pontszám alapján csökkenő sorrendben vannak rendezve.
+  - A pontszám pontosan tükrözi a jelölt relevanciáját a megadott munkaköri profilhoz.
+
+### 10.4. AI által generált jelölt összefoglaló megtekintése
+
+- **Azonosító**: US-004
+- **Leírás**: Talent Tanácsadóként rövid, AI által generált összefoglalót szeretnék olvasni minden megfelelő jelöltről, hogy anélkül is megértsem a képesítéseiket, hogy elolvasnám a teljes dokumentumot.
+- **Elfogadási feltételek**:
+  - A keresési eredményekben szereplő minden jelölt tartalmaz egy rövid összefoglalót (2-4 mondat).
+  - Az összefoglalót az AI generálja a jelölt dokumentumainak tartalma alapján.
+  - Az összefoglaló kiemeli a kulcsfontosságú készségeket és tapasztalatokat, amelyek a legrelevánsabbak a munkaköri profilhoz.
+
+### 10.5. Egyszerű kérdések feltevése a helpdesk-en keresztül
+
+- **Azonosító**: US-005
+- **Leírás**: Talent Tanácsadóként közvetlen kérdést szeretnék feltenni a jelöltállományról, hogy gyors tényeket és adatokat kapjak.
+- **Elfogadási feltételek**:
+  - A felhasználói felületen van egy szöveges beviteli mező a helpdesk kérdésekhez.
+  - A rendszer képes elemezni és megérteni az egyszerű, természetes nyelvű kérdéseket (pl. „hány jelölt tud Pythont?”).
+  - Közvetlen, szöveges válasz visszatér, és megjelenik a felhasználói felületen.
+
+### 10.6. Eredmény nélküli forgatókönyvek kezelése
+
+- **Azonosító**: US-006
+- **Leírás**: Felhasználóként, ha a keresésem vagy lekérdezésem nem hoz eredményt, egyértelmű üzenetet szeretnék látni, hogy tudjam, a rendszer befejezte a kérésem feldolgozását.
+- **Elfogadási feltételek**:
+  - Ha egy jelöltkeresés nulla találatot eredményez, egy „Nincs releváns jelölt található” üzenet jelenik meg.
+  - Ha egy helpdesk lekérdezésre nem lehet válaszolni, vagy nem talál adatot, egy „Nincs találat a lekérdezésre” üzenet jelenik meg.
+  - Az üzenet felhasználóbarát és jól látható.
+
+### 10.7. Biztonságos adatfeldolgozás
+
+- **Azonosító**: US-007
+- **Leírás**: Rendszeradminisztrátorként biztosítani szeretném, hogy az alkalmazás biztonságosan és a céges irányelveknek megfelelően dolgozza fel az adatokat az érzékeny jelöltinformációk védelme érdekében.
+- **Elfogadási feltételek**:
+  - Az alkalmazás nem tárolja a jelölt PII (személyazonosításra alkalmas adatok) állandó másolatát.
+  - Minden adatfeldolgozás a jóváhagyott biztonságos környezetben (Google Cloud vagy helyi) történik.
+  - Ha külső szolgáltatásokat használnak, az összes PII-t sikeresen anonimizálják, mielőtt elküldik.
+  - A rendszer átmegy az összes belső biztonsági és adatvédelmi felülvizsgálaton.
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# (ENG) Product Requirements Document: Resourcing AI Agent
 
 ## 1. Product overview
 ### 1.1 Document title and version
@@ -6,7 +265,7 @@
 - Version: 1.0
 
 ### 1.2 Product summary
-This document outlines the requirements for an internal AI-powered application designed to support the Talent Consultant team at KIBT Solutions. The tool will integrate with the existing candidate database stored in Google Workspace to streamline and enhance the recruitment process.
+This document outlines the requirements for an internal AI-powered application designed to support the Talent Consultant team at KIBIT Solutions. The tool will integrate with the existing candidate database stored in Google Workspace to streamline and enhance the recruitment process.
 
 The core functionality includes matching candidates to specific job profiles by providing a relevance score and a concise evaluation for each. Additionally, it will feature a "helpdesk" function, allowing recruiters to ask natural language questions about the candidate pool. The initial version will focus on core functionality with a simple user interface, ensuring data security and compliance with KIBT's data policies are top priorities.
 
