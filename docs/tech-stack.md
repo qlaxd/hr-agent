@@ -1,4 +1,4 @@
-# Technológiai Stack: Erőforrás-tervező AI Ügynök
+# Technológiai Stack: HR-Assistant AI Ügynök
 
 ## 1. Áttekintés
 
