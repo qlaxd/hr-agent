@@ -1,102 +1,66 @@
-# Fejlesztési Roadmap – HR-Kibit Agent
+# Fejlesztési Roadmap (Tech Lead iránymutatása alapján)
 
 ## 1. Áttekintés
 
-Ez a roadmap a HR-Kibit Agent projekt főbb fejlesztési fázisait, mérföldköveit és prioritásait tartalmazza. A cél egy biztonságos, skálázható, AI-alapú belső eszköz, amely a Google Workspace-ben tárolt jelöltadatbázisra építve támogatja a toborzási folyamatokat.
+Ez a dokumentum a **Resourcing AI Agent** és a **Controlling AI Agent** projektek fejlesztési ütemtervét vázolja fel. A terv a tech lead javaslatai alapján készült, az alábbi fő alapelvek mentén:
+1.  **Funkcionalitás Elsőként**: A fő hangsúly a működőképes üzleti logikán van.
+2.  **CLI-First Megközelítés**: A felhasználói felület (UI) fejlesztése előtt egy parancssori interfészen (CLI) keresztül tesszük tesztelhetővé és akár korai fázisban bemutathatóvá a funkciókat.
+3.  **Fázisolt Fejlesztés**: Először a közös dokumentumkezelési alapokat, majd az AI-magot, és csak a végén a felhasználói felületet készítjük el.
+
+## 2. Részletes Fázisok és Feladatok
 
 ---
 
-## 2. Főbb mérföldkövek és fázisok
+### **1. Fázis: Alapok és Közös Dokumentumkezelés (CLI)**
+**Cél:** Egy stabil alap létrehozása a monorepo-ban, és egy CLI alkalmazás, amely képes beolvasni, feldolgozni és alapvető metaadatokkal ellátni a dokumentumokat mindkét projekt számára.
+**Becsült időtartam: ~3 hét (14 nap)**
 
-### 2.1. Fázis 1: Alapinfrastruktúra és backend
-
-- **Google Cloud Platform (GCP) projekt létrehozása**
-- **Service Account-ok, jogosultságok, titokkezelés (Secret Manager) beállítása**
-- **Google Drive API integráció (read-only)**
-- **Backend API (FastAPI) alapok, CI/CD pipeline (GitHub Actions, Docker, Cloud Run)**
-- **Alapvető adatmodellek, séma (SQLAlchemy, Pydantic)**
-- **Metaadat-tárolás (Firestore vagy Cloud SQL)**
-- **Alapvető hitelesítés (Google OAuth 2.0, Authlib)**
-
-### 2.2. Fázis 2: Adatfeldolgozó pipeline és tudásbázis
-
-- **Dokumentum-feldolgozó pipeline (Cloud Functions, Apache Tika)**
-- **Szövegkinyerés, chunkolás, metaadatok mentése**
-- **Embedding generálás (Vertex AI Embedding API)**
-- **Vektor-adatbázis (Vertex AI Vector Search) integráció**
-- **Dokumentumok biztonságos tárolása (Cloud Storage)**
-- **Alap audit logolás, naplózás**
-
-### 2.3. Fázis 3: AI mag, keresés és relevancia
-
-- **RAG pipeline (LlamaIndex, Vertex AI Gemini 1.5 Pro)**
-- **Szemantikus keresés, relevancia pontszámítás**
-- **PII anonimizálás (Microsoft Presidio)**
-- **AI által generált összefoglalók, helpdesk Q&A**
-- **Jogosultságkezelés, szerepkörök (backend oldalon)**
-
-### 2.4. Fázis 4: Frontend és felhasználói élmény
-
-- **SPA frontend (React + MUI, Zustand)**
-- **Alapvető kereső és helpdesk UI**
-- **Google OAuth 2.0 integráció a frontendben**
-- **Frontend-backend integráció, API hívások**
-- **Firebase Hosting beállítása**
-
-### 2.5. Fázis 5: Biztonság, audit, compliance
-
-- **Fenyegetésmodellezés, jogosultságok finomhangolása**
-- **PII-kezelés, anonimizálás, GDPR megfelelés**
-- **Audit logok, naplózás, monitoring (Stackdriver, GCP Audit Logs)**
-- **Penetrációs tesztek, belső biztonsági review**
-
-### 2.6. Fázis 6: Tesztelés, bevezetés, visszacsatolás
-
-- **Automatizált tesztek (unit, integrációs, e2e)**
-- **Felhasználói elfogadási tesztelés (UAT)**
-- **Dokumentáció, oktatás, belső rollout**
-- **Visszacsatolás gyűjtése, iteratív fejlesztés**
+| # | Feladat | Specifikáció | Becsült Idő | Függőség | Deliverable |
+|---|---|---|---|---|---|
+| 1.1 | **Monorepo & Környezet Setup** | A `repository-structure.md` alapján a könyvtárstruktúra létrehozása. `pyproject.toml` és alap `requirements.txt` beállítása. | 2 nap | - | Verziókövetett, strukturált repository. |
+| 1.2 | **Közös Backend Core (`shared/backend`)** | FastAPI alapok, központi konfiguráció (`pydantic-settings`), logging, alapvető hibakezelés. | 3 nap | 1.1 | Működő, de üres FastAPI alkalmazás. |
+| 1.3 | **Google Drive Integráció (`shared/utils`)** | Biztonságos wrapper a Google Drive API-hoz (Service Account alapú), ami képes fájlokat listázni és letölteni. | 2 nap | 1.2 | Függvény, ami letölt egy fájlt a Drive-ról. |
+| 1.4 | **Közös Adatbázis & Modellek** | Cloud SQL (PostgreSQL) kapcsolat beállítása (`SQLAlchemy`). Közös `FileMetadata` modell létrehozása. | 2 nap | 1.2 | Adatbázis séma és kapcsolat. |
+| 1.5 | **Resourcing Agent Parser** | Dokumentumfeldolgozó, ami a `.pdf`, `.docx` fájlokból kinyeri a nyers szöveget (`python-docx`, `pypdf`) és elmenti a metaadatokat az adatbázisba. | 2 nap | 1.3, 1.4 | Script, ami feldolgoz egy CV-t. |
+| 1.6 | **Controlling Agent Parser** | Dokumentumfeldolgozó, ami a `.csv`, `.xlsx` fájlokból kinyeri a táblázatos adatokat (`pandas`) és elmenti a metaadatokat az adatbázisba. | 2 nap | 1.3, 1.4 | Script, ami feldolgoz egy kivonatot. |
+| 1.7 | **CLI Interfész Létrehozása** | `Typer` vagy `Click` alapú CLI, ami lehetővé teszi a parserek futtatását (pl. `python main.py process-resourcing-files`). | 1 nap | 1.5, 1.6 | Működő CLI eszköz. |
 
 ---
 
-## 3. Prioritások és időzítés (javaslat)
+### **2. Fázis: AI Mag Fejlesztés (CLI)**
+**Cél:** A két projekt specifikus "agyának" megépítése. A funkciók továbbra is CLI-n keresztül tesztelhetők.
+**Becsült időtartam: ~2.5 hét (12 nap)**
 
-| Fázis | Főbb feladatok | Időtartam (becslés) |
-|-------|----------------|---------------------|
-| 1     | Infrastruktúra, backend alapok | 1 hét |
-| 2     | Adatfeldolgozás, tudásbázis | 1 hét |
-| 3     | AI mag, keresés, relevancia | 1 hét |
-| 4     | Frontend, UX | 1 hét |
-| 5     | Biztonság, compliance | 0,5 hét |
-| 6     | Tesztelés, rollout | 0,5 hét |
-
----
-
-## 4. Kiemelt technológiák, könyvtárak, indoklás
-
-- **GCP (Cloud Run, Functions, Firestore, Vertex AI, Secret Manager, Pub/Sub, Scheduler):** Menedzselt, biztonságos, skálázható, natív Google integráció.
-- **FastAPI, Uvicorn, SQLAlchemy, Pydantic:** Modern, gyors Python backend, AI/ML ökoszisztéma.
-- **React, MUI, Zustand:** Modern, gyors, jól karbantartható frontend.
-- **LlamaIndex, Vertex AI Gemini, Presidio:** RAG pipeline, szemantikus keresés, PII védelem.
-- **GitHub, GitHub Actions, Docker:** Forráskódkezelés, CI/CD, konténerizáció.
-- **Google OAuth 2.0, Secret Manager:** Biztonságos authentikáció, titokkezelés.
+| # | Feladat | Specifikáció | Becsült Idő | Függőség | Deliverable |
+|---|---|---|---|---|---|
+| 2.1 | **Resourcing: Embedding & Vektortárolás** | A szöveg-chunkok beágyazása (Vertex AI Embedding API). A vektorok tárolása egy vektoradatbázisban (pl. `ChromaDB` a gyors helyi prototipizáláshoz). | 3 nap | 1.5 | Vektorokkal feltöltött adatbázis. |
+| 2.2 | **Resourcing: Szemantikus Keresés (RAG)** | Alap RAG pipeline `LlamaIndex`-szel. A CLI kap egy `search` parancsot, ami egy job profile-ra visszaadja a top 3 releváns dokumentumot. | 3 nap | 2.1 | CLI-n működő jelöltkeresés. |
+| 2.3 | **Resourcing: PII Anonimizálás** | A releváns szövegrészek anonimizálása (pl. `presidio`) az LLM hívás előtt. | 1 nap | 2.2 | Anonimizált szöveget használó pipeline. |
+| 2.4 | **Controlling: Egyeztető Motor** | Az alap párosító algoritmus megírása (szigorú szabályok: pontos összeg, dátum egyezés). | 3 nap | 1.6 | Script, ami két fájl alapján megtalálja a 100%-os egyezéseket. |
+| 2.5 | **Controlling: Tanuló Modul Alapok** | Adatbázis séma a manuális párosítási szabályok tárolására. Logika, ami a manuális párosításból egyszerű szabályt generál. | 2 nap | 2.4 | Adatbázis-alapú szabálytárolás. |
 
 ---
 
-## 5. Sikerességi kritériumok
+### **3. Fázis: API és Felhasználói Felület**
+**Cél:** A CLI-n validált funkciók elérhetővé tétele egy egyszerű, de használható webes felületen keresztül.
+**Becsült időtartam: ~3 hét (13 nap)**
 
-- Gyors, pontos keresés és relevancia
-- Magas biztonsági szint, PII védelem, auditálhatóság
-- Felhasználóbarát, letisztult UI
-- Könnyű üzemeltetés, skálázhatóság, alacsony karbantartási igény
-- Pozitív felhasználói visszajelzések, gyors bevezetés
+| # | Feladat | Specifikáció | Becsült Idő | Függőség | Deliverable |
+|---|---|---|---|---|---|
+| 3.1 | **Hitelesítés & API Végpontok** | Google OAuth 2.0 beállítása a FastAPI backend-en. Védett API végpontok létrehozása a kereséshez és egyeztetéshez. | 3 nap | Fázis 2 | Védett REST API. |
+| 3.2 | **Frontend Core (`shared/frontend`)** | Alap React (vagy Vue) projekt beállítása, komponens könyvtár (MUI) integrálása, Google bejelentkezés implementálása. | 2 nap | 3.1 | Bejelentkezési képernyő. |
+| 3.3 | **Resourcing Agent UI** | Kereső felület, ahol a recruiter beírhatja a keresést, és egy lista nézetben megjelennek az eredmények (jelölt neve, scoring, rövid indoklás). | 3 nap | 3.2 | Működő jelöltkereső UI. |
+| 3.4 | **Controlling Agent UI** | Fájlfeltöltő felület. Háromoszlopos nézet (Párosított, Nem párosított banki, Nem párosított belső), ahol a manuális párosítás elvégezhető. | 4 nap | 3.2 | Működő egyeztető UI. |
+| 3.5 | **Deployment Előkészítés** | `Dockerfile`-ok véglegesítése. Alap CI/CD pipeline (GitHub Actions), ami buildel és tesztel. | 1 nap | Mind | Automatizált build. |
 
 ---
 
-## 6. Iterációk és továbbfejlesztési lehetőségek
+### **4. Fázis: Tesztelés, Finomhangolás és Bevezetés**
+**Cél:** A rendszer stabilizálása, felhasználói visszajelzések becsatornázása és a hivatalos belső bevezetés.
+**Becsült időtartam: Folyamatos**
 
-- **Haladó keresési funkciók (pl. szűrők, aggregációk)**
-- **További AI modellek, finomhangolás**
-- **Mobil támogatás**
-- **Részletesebb admin felület, riportok**
-- **Integráció további belső rendszerekkel**
+| # | Feladat | Specifikáció | Becsült Idő | Függőség | Deliverable |
+|---|---|---|---|---|---|
+| 4.1 | **Unit & Integrációs Tesztek** | A kritikus logikai részek (parserek, AI mag) lefedése automatizált tesztekkel. | Folyamatos | - | Magasabb kódminőség. |
+| 4.2 | **Felhasználói Tesztelés (UAT)** | A pénzügyi és recruiter kollégák bevonása, visszajelzések gyűjtése. | Folyamatos | Fázis 3 | Visszajelzések listája. |
+| 4.3 | **Dokumentáció & Rollout** | Felhasználói útmutatók elkészítése. Belső oktatás és a rendszer élesítése. | Folyamatos | - | Elégedett felhasználók. |
