@@ -1,6 +1,7 @@
 # Software Design Document (SDD)
 
 ## 1. Bevezetés
+
 Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) szoftver architektúráját, komponenseit, adatfolyamait, interfészeit, valamint a választott technológiák és könyvtárak indoklását. A cél egy biztonságos, skálázható, könnyen karbantartható, cloud-native AI-alapú rendszer, amely a toborzási folyamatokat támogatja.
 
 ---
@@ -8,6 +9,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ## 2. Főbb technológiák, frameworkök és könyvtárak
 
 ### 2.1. Frontend
+
 - **React.js**: Modern, komponens-alapú SPA fejlesztéshez. Gyors fejlesztés, nagy ökoszisztéma, könnyű bővíthetőség.
 - **Material-UI (MUI)**: React-hez készült UI komponens könyvtár, gyors, egységes, reszponzív felület.
 - **Zustand**: Egyszerű, minimális boilerplate állapotkezelő, ideális a projekt egyszerűségéhez.
@@ -15,6 +17,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 - **Axios**: HTTP kliens az API hívásokhoz.
 
 ### 2.2. Backend
+
 - **FastAPI (Python 3.11+)**: Modern, aszinkron REST API framework, automatikus OpenAPI dokumentációval, gyors fejlesztés, natív async támogatás.
 - **Uvicorn**: ASGI szerver FastAPI-hoz.
 - **Pydantic**: Adatmodellezés, validáció, típusbiztonság.
@@ -22,21 +25,25 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 - **Python könyvtárak**: requests, httpx, loguru (logolás), pytest (tesztelés), python-dotenv (környezeti változók kezelése).
 
 ### 2.3. AI & RAG Pipeline
+
 - **Google Vertex AI - Gemini 1.5 Pro**: LLM, összefoglalók, Q&A, relevancia pontszám generálás.
 - **Google Vertex AI - Text Embedding API**: Szövegek embeddinggé alakítása, szemantikus kereséshez.
 - **LlamaIndex**: RAG pipeline orchesztráció, dokumentum betöltés, chunkolás, indexelés, query engine.
 - **Microsoft Presidio**: PII anonimizálás, személyes adatok eltávolítása a szövegből.
 
 ### 2.4. Adatfeldolgozás
+
 - **Apache Tika (tika-python)**: Dokumentumokból (PDF, DOCX, DOC) szöveg kinyerése.
 - **Google Cloud Functions (2nd gen)**: Eseményvezérelt, skálázható feldolgozás.
 - **Google Cloud Scheduler & Pub/Sub**: Ütemezett pipeline triggerelés, aszinkron feldolgozás.
 
 ### 2.5. Adatbázisok, adattárolás
+
 - **Vertex AI Vector Search**: Vektor-adatbázis, gyors szemantikus keresés.
 - **Google Firestore**: NoSQL metaadat-tároló, dokumentum metaadatok, chunk-azonosítók.
 
 ### 2.6. Infrastruktúra, CI/CD
+
 - **Google Cloud Platform (GCP)**: Menedzselt szolgáltatások, skálázhatóság, biztonság.
 - **Google Cloud Run**: Backend API hoszting, automatikus skálázás, konténerizáció.
 - **Firebase Hosting**: Frontend hoszting, gyors CDN.
@@ -44,6 +51,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 - **Docker**: Konténerizáció, könnyű deployment.
 
 ### 2.7. Authentikáció, biztonság
+
 - **Google Identity Platform (OAuth 2.0)**: SSO, biztonságos bejelentkezés.
 - **Google Secret Manager**: Titokkezelés, API kulcsok, jelszavak biztonságos tárolása.
 - **Google Drive API**: Dokumentumok elérése, olvasási jogosultság.
@@ -53,12 +61,14 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ## 3. Rendszer komponensek és modulok
 
 ### 3.1. Frontend SPA
+
 - **Felhasználói felület**: React + MUI komponensek, két fő funkció: "Jelöltek keresése" és "Helpdesk Q&A".
 - **Állapotkezelés**: Zustand, a keresési eredmények, felhasználói adatok tárolására.
 - **API kommunikáció**: Axios, minden adat backend API-n keresztül érkezik.
 - **Hitelesítés**: Google SSO, token kezelése frontend oldalon.
 
 ### 3.2. Backend API (FastAPI)
+
 - **REST végpontok**:
   - `/search-candidates` (POST): Munkaköri leírás alapján releváns jelöltek keresése.
   - `/helpdesk-query` (POST): Természetes nyelvű kérdések kezelése.
@@ -69,15 +79,18 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 - **Integrációk**: Google Drive API, Vertex AI, Firestore, Vector Search, Presidio.
 
 ### 3.3. Adatfeldolgozó pipeline
+
 - **Cloud Function**: Új/Friss dokumentum detektálása, szövegkinyerés (Tika), metaadat mentés (Firestore), embedding generálás (Vertex AI), vektor-adatbázis frissítés.
 - **Scheduler & Pub/Sub**: Időzített futtatás, események továbbítása.
 
 ### 3.4. AI mag (RAG pipeline)
+
 - **LlamaIndex**: Dokumentum chunkolás, indexelés, query engine.
 - **Gemini 1.5 Pro**: Összefoglalók, Q&A, relevancia pontszám.
 - **Presidio**: PII anonimizálás minden LLM hívás előtt.
 
 ### 3.5. Adatbázisok
+
 - **Firestore**: Dokumentum metaadatok, chunk-azonosítók.
 - **Vertex AI Vector Search**: Embeddingek, gyors hasonlósági keresés.
 
@@ -86,6 +99,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ## 4. Adatfolyamok, sequence diagramok
 
 ### 4.1. Jelölt keresés folyamata
+
 1. Felhasználó bejelentkezik (Google SSO)
 2. Munkaköri leírást beküld a frontendről
 3. Backend API fogadja, validálja, továbbítja a RAG pipeline-nak
@@ -94,6 +108,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 6. Eredmények vissza a frontendnek
 
 ### 4.2. Dokumentum feldolgozás pipeline
+
 1. Cloud Scheduler triggereli a pipeline-t
 2. Cloud Function detektálja az új/updated dokumentumokat (Google Drive API)
 3. Tika kinyeri a szöveget
@@ -104,6 +119,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ---
 
 ## 5. Hibakezelési stratégia
+
 - **Frontend**: Felhasználóbarát hibaüzenetek, toastok, API hibák kezelése.
 - **Backend**: Részletes logolás, HTTP státuszkódok, validációs hibák, try/except blokkok, automatikus alerting (GCP monitoring).
 - **Pipeline**: Események naplózása, hibás dokumentumok külön queue-ba kerülnek, manuális review lehetősége.
@@ -111,6 +127,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ---
 
 ## 6. Külső API-k, integrációk
+
 - **Google Drive API**: Dokumentumok elérése, csak olvasási jog.
 - **Vertex AI**: LLM, embedding szolgáltatások.
 - **Firestore**: Metaadatok tárolása.
@@ -122,6 +139,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ---
 
 ## 7. Kódolási konvenciók, stílusguide
+
 - **Frontend**: Airbnb React/JSX Style Guide, Prettier, ESLint.
 - **Backend**: PEP8, Black, isort, mypy, flake8.
 - **CI/CD**: Automatikus linting, tesztelés minden push-ra.
@@ -129,6 +147,7 @@ Ez a dokumentum részletesen bemutatja a HR-Kibit Agent (Resourcing AI Agent) sz
 ---
 
 ## 8. Glosszárium
+
 - **RAG**: Retrieval-Augmented Generation, keresés-alapú AI válaszgenerálás
 - **LLM**: Large Language Model
 - **Embedding**: Szövegek vektorreprezentációja

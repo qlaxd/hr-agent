@@ -140,7 +140,7 @@ Ez az automatizált pipeline felelős azért, hogy a tudásbázis szinkronban ma
   - **Embedding készítése**
   - **Vektor keresés**
   - **Kontextus lekérése**
-  - **Anonimizálás**: PII adatokat placeholderre cserél.
+  - **Anonimizálás**: PII adatokat placeholderre cserél. (pl.: Teszt Elek --> [Jelentkező Neve])
   - **Prompt összeállítása**
   - **LLM hívás**: Gemini választ generál.
   - **Visszaanonimizálás**
@@ -188,34 +188,6 @@ Ez az automatizált pipeline felelős azért, hogy a tudásbázis szinkronban ma
 - **Titkosítás**: TLS (adatátvitel), GCP titkosítás (tárolt adatok)
 - **Anonimizálás**: Lásd 4.2. rész – kulcselem a külső LLM-ek biztonságos használatához
 - **Legkisebb jogosultság elve**: A szolgáltatásfiók csak olvasási joggal rendelkezik a Google Drive-on
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # (ENG) Architecture Design: Resourcing AI Agent
 

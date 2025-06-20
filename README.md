@@ -41,16 +41,19 @@ A Resourcing AI Agent egy belső, mesterséges intelligencia alapú alkalmazás,
 **Telepítés:**
 
 Klónozd a repót:
+
 ```bash
 git clone <repo-url>
 ```
 
 **Backend:**
+
 ```bash
 cd backend && pip install -r requirements.txt
 ```
 
 **Frontend:**
+
 ```bash
 cd frontend && npm install
 ```
@@ -58,11 +61,13 @@ cd frontend && npm install
 **Futtatás:**
 
 **Backend:**
+
 ```bash
 uvicorn main:app --reload
 ```
 
 **Frontend:**
+
 ```bash
 npm start
 ```
